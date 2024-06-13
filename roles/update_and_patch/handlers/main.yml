@@ -1,0 +1,24 @@
+- name: Copy the file to the remote server
+  include_tasks: copy_to_remote.yml
+
+- name: Copy file from remote server to target directory
+  include_tasks: copy_to_target.yml
+
+- name: Execute the curl command
+  include_tasks: execute_curl.yml
+
+- name: Wait for 5 minutes before checking the log file
+  ansible.builtin.pause:
+    minutes: 5
+
+- name: Check the log file
+  include_tasks: check_log.yml
+
+- name: Trigger restart handler if update was successful
+  ansible.builtin.meta: flush_handlers
+  when: log_content.stdout.endswith('Completed Update')
+
+- name: Show remaining retries
+  ansible.builtin.debug:
+    msg: "Remaining retries: {{ remaining_retries.retries }}"
+

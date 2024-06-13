@@ -1,0 +1,3 @@
+- name: Execute the curl command
+  ansible.builtin.shell: curl "http://localhost:9990/patch?version={{ file_to_update }}"
+  register: curl_output

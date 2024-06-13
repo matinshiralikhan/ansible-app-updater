@@ -1,0 +1,5 @@
+---
+- name: Copy file from remote server to target directory
+  ansible.builtin.command: >
+    ssh root@{{ ansible_host }} "scp {{ remote_builds_directory }}/{{ file_to_update }} {{ local_target_directory }}"
+  become: yes

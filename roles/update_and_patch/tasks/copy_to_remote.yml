@@ -1,0 +1,5 @@
+---
+- name: Fetch the file from the remote server
+  ansible.builtin.command: >
+        scp root@10.10.10.217:{{ remote_builds_directory }}/{{ file_to_update }} root@{{ ansible_host }}:{{ remote_builds_directory }}
+  become: yes
