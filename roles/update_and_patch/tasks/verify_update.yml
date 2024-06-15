@@ -1,41 +1,20 @@
-- name: Empty the log file
-  ansible.builtin.command: truncate -s 0 {{ log_file_path }}
+- name: Copy the verify_update.sh script to the remote server
+  ansible.builtin.copy:
+    src: /tmp/auto-update-baadbaan/verify_update.sh
+    dest: /tmp/verify_update.sh
+    mode: '0755'
 
-- name: Pause for 30 seconds to allow the update process to start
-  ansible.builtin.pause:
-    seconds: 30
+- name: Execute the verify_update.sh script
+  ansible.builtin.shell: /tmp/verify_update.sh
+  register: verify_update_result
+  ignore_errors: yes
 
-- name: Verify the first log entry
-  ansible.builtin.shell: head -n 1 {{ log_file_path }}
-  register: first_log_entry
-
-- name: Validate the first log entry
+- name: Fail if the update did not complete successfully
   ansible.builtin.fail:
-    msg: "The first log entry is not from today or does not start with 'Started'"
-  when: >
-    not (first_log_entry.stdout is search("{{ ansible_date_time.date }}") and
-         first_log_entry.stdout is search("Started"))
+    msg: "Update did not complete successfully. Check the log for details."
+  when: verify_update_result.rc != 0
 
-- name: Pause for 3 minutes to allow the update process to complete
-  ansible.builtin.pause:
-    minutes: 3
-
-- name: Verify the last log entry
-  ansible.builtin.shell: tail -n 1 {{ log_file_path }}
-  register: last_log_entry
-
-- name: Check if the update completed successfully
-  ansible.builtin.block:
-    - name: Success message
-      ansible.builtin.debug:
-        msg: "Update completed successfully"
-      when: >
-        last_log_entry.stdout is search("{{ ansible_date_time.date }}") and
-        last_log_entry.stdout is search("Completed Update")
-
-    - name: Show last log entry and fail
-      ansible.builtin.fail:
-        msg: "Update did not complete successfully. Last log entry: {{ last_log_entry.stdout }}"
-      when: >
-        not (last_log_entry.stdout is search("{{ ansible_date_time.date }}") and
-             last_log_entry.stdout is search("Completed Update"))
+- name: Display success message
+  ansible.builtin.debug:
+    msg: "Update completed successfully."
+  when: verify_update_result.rc == 0
