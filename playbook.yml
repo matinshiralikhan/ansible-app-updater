@@ -1,8 +1,7 @@
 ---
 - name: Update and patch application
-  hosts: all
+  hosts: webservers
   vars_files:
     - roles/update_and_patch/vars/main.yml
-  tasks:
-    - include_role:
-        name: update_and_patch
+  roles:
+    - update_and_patch

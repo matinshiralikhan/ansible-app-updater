@@ -1,0 +1,5 @@
+- name: Transfer the update file to the target directory on the remote server
+  ansible.builtin.command: >
+    scp {{ local_tmp }}/{{ file_to_update }} root@10.10.10.214:{{ local_target_directory }}
+  become: yes
+  delegate_to: localhost

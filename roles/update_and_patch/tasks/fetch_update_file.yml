@@ -1,0 +1,5 @@
+- name: Fetch the update file from the build server
+  ansible.builtin.command: >
+    scp root@10.10.10.217:{{ remote_builds_directory }}/{{ file_to_update }} {{ local_tmp }}
+  become: yes
+  delegate_to: localhost
