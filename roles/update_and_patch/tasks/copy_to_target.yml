@@ -1,5 +1,6 @@
 ---
 - name: Copy file from remote server to target directory
   ansible.builtin.command: >
-    ssh root@{{ ansible_host }} "scp {{ remote_builds_directory }}/{{ file_to_update }} {{ local_target_directory }}"
+    scp /tmp/20.1.2-to-20.1.3.tar.gz.enc root@10.10.10.214:{{ local_target_directory }}
   become: yes
+  delegate_to: localhost

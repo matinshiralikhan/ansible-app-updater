@@ -12,7 +12,6 @@ This Ansible project is designed to automate the process of updating and patchin
 /auto-update-baadbaan
 |-- ansible.cfg
 |-- hosts
-|-- var.yml
 |-- playbook.yml
 |-- roles/
     |-- update_and_patch/
@@ -53,7 +52,7 @@ This YAML file contains variables used in the playbook. In this case, it defines
 
 ```yaml
 ---
-file_to_update: 25-to-26.tar.gz.enc
+file_to_update: 20.1.2-to-20.1.3.tar.gz.enc
 ```
 
 #### 4. `playbook.yml`

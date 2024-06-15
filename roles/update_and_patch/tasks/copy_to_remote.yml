@@ -1,5 +1,5 @@
----
-- name: Fetch the file from the remote server
+- name: Copy the file from the remote server using scp
   ansible.builtin.command: >
-        scp root@10.10.10.217:{{ remote_builds_directory }}/{{ file_to_update }} root@{{ ansible_host }}:{{ remote_builds_directory }}
+    scp root@10.10.10.217:/var/www/abshar/bin/builds/{{ file_to_update }} {{ local_tmp }}
   become: yes
+  delegate_to: localhost
