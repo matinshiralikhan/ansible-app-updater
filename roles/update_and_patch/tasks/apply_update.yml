@@ -1,3 +1,8 @@
+- name: Clear the log file
+  ansible.builtin.shell: echo -n > {{ log_file_path }}
+  become: yes
+
 - name: Apply the update using the curl command
   ansible.builtin.shell: curl "http://172.17.0.1:9990/patch?version={{ file_to_update }}"
   register: curl_output
+  become: yes
