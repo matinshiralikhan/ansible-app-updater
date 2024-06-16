@@ -1,11 +1,10 @@
-```
-# ansible-app-updater
+# 🚀 ansible-app-updater
 
 This Ansible project automates the process of updating and patching an application on a remote server. It includes various roles and tasks to ensure the update process is seamless and logs are properly monitored.
 
-## Project Structure
+## 📂 Project Structure
 
-```
+```plaintext
 /ansible-app-updater
 |-- ansible.cfg
 |-- hosts
@@ -22,9 +21,9 @@ This Ansible project automates the process of updating and patching an applicati
             |-- main.yml
 ```
 
-## Files and Directories
+## 📄 Files and Directories
 
-### ansible.cfg
+### 🔧 ansible.cfg
 
 This file contains the Ansible configuration settings:
 
@@ -35,16 +34,16 @@ remote_user = your_remote_user
 host_key_checking = False
 ```
 
-### hosts
+### 🌐 hosts
 
 This file defines the target hosts for the Ansible playbook:
 
-```
+```plaintext
 [webservers]
 your_remote_host ansible_ssh_private_key_file=/path/to/your/private/key
 ```
 
-### playbook.yml
+### 📜 playbook.yml
 
 This is the main playbook that includes the `update_and_patch` role:
 
@@ -59,7 +58,7 @@ This is the main playbook that includes the `update_and_patch` role:
         name: update_and_patch
 ```
 
-### roles/update_and_patch/vars/main.yml
+### 🔧 roles/update_and_patch/vars/main.yml
 
 This file defines variables used in the `update_and_patch` role:
 
@@ -71,7 +70,7 @@ log_file_path: "/var/www/html/services/update-toolbox/app.log"
 local_tmp: "/tmp/"
 ```
 
-### roles/update_and_patch/tasks/main.yml
+### 📝 roles/update_and_patch/tasks/main.yml
 
 This file includes all the necessary tasks for the `update_and_patch` role:
 
@@ -93,7 +92,7 @@ This file includes all the necessary tasks for the `update_and_patch` role:
   include_tasks: verify_update.yml
 ```
 
-### roles/update_and_patch/tasks/copy_to_remote.yml
+### 📦 roles/update_and_patch/tasks/copy_to_remote.yml
 
 This task copies the update file from a remote build server to the Ansible controller's local temporary directory:
 
@@ -104,7 +103,7 @@ This task copies the update file from a remote build server to the Ansible contr
   delegate_to: localhost
 ```
 
-### roles/update_and_patch/tasks/copy_to_target.yml
+### 📂 roles/update_and_patch/tasks/copy_to_target.yml
 
 This task copies the update file from the Ansible controller's local temporary directory to the target directory on the remote server:
 
@@ -115,24 +114,24 @@ This task copies the update file from the Ansible controller's local temporary d
     dest: "{{ local_target_directory }}"
 ```
 
-### roles/update_and_patch/tasks/execute_curl.yml
+### 🌐 roles/update_and_patch/tasks/execute_curl.yml
 
 This task executes a curl command to apply the patch:
-
+example:
 ```yaml
 - name: Execute the curl command
   ansible.builtin.shell: curl "http://localhost:9990/patch?version={{ file_to_update }}"
   register: curl_output
 ```
 
-### roles/update_and_patch/tasks/verify_update.yml
+### ✅ roles/update_and_patch/tasks/verify_update.yml
 
 This task verifies that the update was successful by checking the log file:
 
 ```yaml
 - name: Copy the verify_update.sh script to the remote server
   ansible.builtin.copy:
-    src: /path/to/your/verify_update.sh
+    src: /tmp/ansible-app-updater/verify_update.sh
     dest: /tmp/verify_update.sh
     mode: '0755'
 
@@ -152,7 +151,7 @@ This task verifies that the update was successful by checking the log file:
   when: verify_update_result.rc == 0
 ```
 
-## Verify Update Script
+## 🛠️ Verify Update Script
 
 Ensure that your `verify_update.sh` script is correctly placed at `/tmp/ansible-app-updater/verify_update.sh`. The script should handle the following:
 
@@ -199,13 +198,13 @@ else
 fi
 ```
 
-## Security Considerations
+## 🔒 Security Considerations
 
 - Avoid hardcoding sensitive information such as IP addresses, usernames, and paths.
 - Ensure proper permissions for all files and directories involved in the update process.
 - Use SSH keys for secure communication between servers.
 
-## Usage
+## 🚀 Usage
 
 1. Clone the repository to your local machine.
 2. Update the `hosts` file with the appropriate remote hosts.
@@ -218,3 +217,5 @@ ansible-playbook playbook.yml
 
 This will start the update and patch process, ensuring the application is updated correctly and logs are properly monitored.
 ```
+
+Feel free to tweak this further to suit your preferences!
