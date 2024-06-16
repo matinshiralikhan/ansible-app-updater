@@ -1,14 +1,12 @@
-Sure! Here's a clean and detailed `README.md` for your Ansible project:
-
-```markdown
-# Auto Update Baadbaan
+```
+# ansible-app-updater
 
 This Ansible project automates the process of updating and patching an application on a remote server. It includes various roles and tasks to ensure the update process is seamless and logs are properly monitored.
 
 ## Project Structure
 
 ```
-/auto-update-baadbaan
+/ansible-app-updater
 |-- ansible.cfg
 |-- hosts
 |-- playbook.yml
@@ -156,7 +154,7 @@ This task verifies that the update was successful by checking the log file:
 
 ## Verify Update Script
 
-Ensure that your `verify_update.sh` script is correctly placed at `/tmp/auto-update-baadbaan/verify_update.sh`. The script should handle the following:
+Ensure that your `verify_update.sh` script is correctly placed at `/tmp/ansible-app-updater/verify_update.sh`. The script should handle the following:
 
 1. Empty the log file.
 2. Pause for 30 seconds.
