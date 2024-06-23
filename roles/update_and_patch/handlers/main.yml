@@ -2,17 +2,17 @@
   include_tasks: copy_to_remote.yml
 
 - name: Copy file from remote server to target directory
-  include_tasks: copy_to_target.yml
+  include_tasks: fetch_update_file.yml
 
 - name: Execute the curl command
-  include_tasks: execute_curl.yml
+  include_tasks: apply_update.yml
 
 - name: Wait for 5 minutes before checking the log file
   ansible.builtin.pause:
     minutes: 5
 
 - name: Check the log file
-  include_tasks: check_log.yml
+  include_tasks: verify_update.yml
 
 - name: Trigger restart handler if update was successful
   ansible.builtin.meta: flush_handlers

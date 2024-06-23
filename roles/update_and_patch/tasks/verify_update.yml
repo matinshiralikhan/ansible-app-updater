@@ -1,6 +1,6 @@
 - name: Copy the verify_update.sh script to the remote server
   ansible.builtin.copy:
-    src: /tmp/auto-update-baadbaan/verify_update.sh
+    src: /tmp/ansible-app-updater/verify_update.sh
     dest: /tmp/verify_update.sh
     mode: '0755'
 
