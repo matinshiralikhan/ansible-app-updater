@@ -1,5 +1,5 @@
 file_to_update: "20.1.2-to-20.1.3.tar.gz.enc"
-remote_builds_directory: "/var/www/abshar/bin/builds"
-local_target_directory: "/var/www/html/baadbaan-docker/baadbaan_new/storage/app/patches"
-log_file_path: "/var/www/html/baadbaan-docker/services/update-toolbox/app.log"
+remote_builds_directory: "/var/www/daxosn/bin/builds"
+local_target_directory: "/var/www/html/daxson/daxson_new/storage/app/patches"
+log_file_path: "/var/www/html/daxson-docker/services/update-toolbox/app.log"
 local_tmp: "/tmp/"
