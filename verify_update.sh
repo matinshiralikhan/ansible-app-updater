@@ -1,5 +1,5 @@
 #!/bin/bash
-LOG_FILE_PATH="/var/www/html/baadbaan-docker/services/update-toolbox/app.log"
+LOG_FILE_PATH="/var/www/html/daxson-docker/services/update-toolbox/app.log"
 DATE=$(date +"%Y/%m/%d")
 FIRST_LOG_ENTRY=$(head -n 1 $LOG_FILE_PATH)
 
